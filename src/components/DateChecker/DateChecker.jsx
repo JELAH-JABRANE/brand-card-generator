@@ -354,32 +354,32 @@ function DateChecker()  {
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 to-sky-50 p-4">
       <div className="max-w-4xl mx-auto pt-8">
-        <main className="text-center space-y-8">
+        <main className="text-center space-y-6 sm:space-y-8">
           {/* Header */}
-          <div className="space-y-2">
-            <h1 className="text-4xl font-bold text-slate-800 mb-2">
+          <div className="space-y-3 sm:space-y-4">
+            <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-slate-800 mb-2">
               What Day Was It? 🗓️
             </h1>
-            <p className="text-lg text-slate-600">
+            <p className="text-base sm:text-lg text-slate-600 px-2">
               Discover the day, zodiac sign, and moon phase for any date
             </p>
           </div>
 
           {/* Date Picker */}
-          <Card className="p-6 shadow-lg border-0 bg-white/80 backdrop-blur-sm">
+          <Card className="p-4 sm:p-6 shadow-lg border-0 bg-white/80 backdrop-blur-sm">
             <div className="space-y-4">
               <div className="flex items-center justify-center gap-2 mb-4">
                 <Calendar className="w-5 h-5 text-sky-600" />
-                <label className="text-lg font-medium text-slate-700">
+                <label className="text-base sm:text-lg font-medium text-slate-700">
                   Choose a Date
                 </label>
               </div>
-              <Input
-                type="date"
-                value={selectedDate}
-                onChange={handleDateChange}
-                className="text-center text-lg max-w-xs mx-auto"
-              />
+                          <Input
+              type="date"
+              value={selectedDate}
+              onChange={handleDateChange}
+              className="text-center text-sm sm:text-base lg:text-lg max-w-xs mx-auto min-h-[44px] px-2 sm:px-3"
+            />
             </div>
           </Card>
 
@@ -388,24 +388,24 @@ function DateChecker()  {
             <>
               <Card 
                 id="result-card" 
-                className="p-8 shadow-xl border-0 bg-white/90 backdrop-blur-sm space-y-6"
+                className="p-4 sm:p-6 lg:p-8 shadow-xl border-0 bg-white/90 backdrop-blur-sm space-y-4 sm:space-y-6"
               >
-                <CardHeader className="pb-4">
-                  <CardTitle className="text-2xl text-slate-700">
+                <CardHeader className="pb-2 sm:pb-4">
+                  <CardTitle className="text-xl sm:text-2xl text-slate-700">
                     {result.date}
                   </CardTitle>
                 </CardHeader>
                 
-                <CardContent className="space-y-6">
+                <CardContent className="space-y-4 sm:space-y-6">
                   {/* Day of Week */}
                   <div className="space-y-2">
                     <div className="flex items-center justify-center gap-2">
-                      <Clock className="w-5 h-5 text-sky-600" />
-                      <span className="text-sm font-medium text-slate-600 uppercase tracking-wide">
+                      <Clock className="w-4 h-4 sm:w-5 sm:h-5 text-sky-600" />
+                      <span className="text-xs sm:text-sm font-medium text-slate-600 uppercase tracking-wide">
                         Day of the Week
                       </span>
                     </div>
-                    <div className="text-4xl font-bold text-sky-600">
+                    <div className="text-2xl sm:text-3xl lg:text-4xl font-bold text-sky-600">
                       {result.dayOfWeek}
                     </div>
                   </div>
@@ -413,15 +413,15 @@ function DateChecker()  {
                   {/* Zodiac Sign */}
                   <div className="space-y-2">
                     <div className="flex items-center justify-center gap-2">
-                      <Star className="w-5 h-5 text-purple-600" />
-                      <span className="text-sm font-medium text-slate-600 uppercase tracking-wide">
+                      <Star className="w-4 h-4 sm:w-5 sm:h-5 text-purple-600" />
+                      <span className="text-xs sm:text-sm font-medium text-slate-600 uppercase tracking-wide">
                         Zodiac Sign
                       </span>
                     </div>
-                    <div className="text-3xl font-bold text-purple-600">
+                    <div className="text-xl sm:text-2xl lg:text-3xl font-bold text-purple-600">
                       {result.zodiacData?.symbol} {result.zodiacSign}
                     </div>
-                    <div className="text-sm text-slate-600">
+                    <div className="text-xs sm:text-sm text-slate-600">
                       {result.zodiacData?.dates} • {result.zodiacData?.element}
                     </div>
                   </div>
@@ -429,22 +429,22 @@ function DateChecker()  {
                   {/* Moon Phase */}
                   <div className="space-y-2">
                     <div className="flex items-center justify-center gap-2">
-                      <Moon className="w-5 h-5 text-indigo-600" />
-                      <span className="text-sm font-medium text-slate-600 uppercase tracking-wide">
+                      <Moon className="w-4 h-4 sm:w-5 sm:h-5 text-indigo-600" />
+                      <span className="text-xs sm:text-sm font-medium text-slate-600 uppercase tracking-wide">
                         Moon Phase
                       </span>
                     </div>
-                    <div className="text-2xl font-bold text-indigo-600">
+                    <div className="text-lg sm:text-xl lg:text-2xl font-bold text-indigo-600">
                       🌙 {result.moonPhase}
                     </div>
                   </div>
 
                   {/* Trivia */}
-                  <div className="bg-emerald-50 rounded-lg p-4 space-y-2">
-                    <div className="text-sm font-medium text-emerald-700 uppercase tracking-wide">
+                  <div className="bg-emerald-50 rounded-lg p-3 sm:p-4 space-y-2">
+                    <div className="text-xs sm:text-sm font-medium text-emerald-700 uppercase tracking-wide">
                       Fun Fact
                     </div>
-                    <div className="text-emerald-800 font-medium">
+                    <div className="text-sm sm:text-base text-emerald-800 font-medium">
                       {result.trivia}
                     </div>
                   </div>
@@ -452,7 +452,7 @@ function DateChecker()  {
                   {/* Download Button */}
                   <Button 
                     onClick={downloadAsImage}
-                    className="w-full bg-gradient-to-r from-sky-600 to-indigo-600 hover:from-sky-700 hover:to-indigo-700 text-white font-medium py-3 rounded-lg shadow-lg transition-all duration-200"
+                    className="w-full min-h-[44px] bg-gradient-to-r from-sky-600 to-indigo-600 hover:from-sky-700 hover:to-indigo-700 text-white font-medium py-3 rounded-lg shadow-lg transition-all duration-200"
                   >
                     <Download className="w-4 h-4 mr-2" />
                     Download as Image
@@ -462,24 +462,24 @@ function DateChecker()  {
 
               {/* Zodiac Profile Section */}
               {result.zodiacData && (
-                <div className="space-y-6 text-left">
-                  <h2 className="text-3xl font-bold text-center text-slate-800 mb-8">
+                <div className="space-y-4 sm:space-y-6 text-left">
+                  <h2 className="text-xl sm:text-2xl lg:text-3xl font-bold text-center text-slate-800 mb-4 sm:mb-6 lg:mb-8">
                     {result.zodiacData.symbol} {result.zodiacSign}: Complete Profile
                   </h2>
 
                   {/* Overview */}
-                  <Card className="p-6 shadow-lg bg-white/90">
+                  <Card className="p-4 sm:p-6 shadow-lg bg-white/90">
                     <CardHeader>
-                      <CardTitle className="flex items-center gap-2 text-xl text-slate-700">
-                        <Sparkles className="w-5 h-5 text-purple-600" />
+                      <CardTitle className="flex items-center gap-2 text-lg sm:text-xl text-slate-700">
+                        <Sparkles className="w-4 h-4 sm:w-5 sm:h-5 text-purple-600" />
                         Zodiac Overview
                       </CardTitle>
                     </CardHeader>
                     <CardContent className="space-y-4">
-                      <div className="grid md:grid-cols-2 gap-4">
+                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                         <div>
                           <h4 className="font-semibold text-slate-700 mb-2">Basic Info</h4>
-                          <div className="space-y-1 text-sm text-slate-600">
+                          <div className="space-y-1 text-xs sm:text-sm text-slate-600">
                             <p><strong>Dates:</strong> {result.zodiacData.dates}</p>
                             <p><strong>Element:</strong> {result.zodiacData.element}</p>
                             <p><strong>Ruling Planet:</strong> {result.zodiacData.planet}</p>
@@ -487,12 +487,12 @@ function DateChecker()  {
                         </div>
                         <div>
                           <h4 className="font-semibold text-slate-700 mb-2">Season Meaning</h4>
-                          <p className="text-sm text-slate-600">{result.zodiacData.season}</p>
+                          <p className="text-xs sm:text-sm text-slate-600">{result.zodiacData.season}</p>
                         </div>
                       </div>
                       <div>
                         <h4 className="font-semibold text-slate-700 mb-2">Personality</h4>
-                        <p className="text-slate-600">{result.zodiacData.description}</p>
+                        <p className="text-xs sm:text-sm text-slate-600">{result.zodiacData.description}</p>
                       </div>
                     </CardContent>
                   </Card>

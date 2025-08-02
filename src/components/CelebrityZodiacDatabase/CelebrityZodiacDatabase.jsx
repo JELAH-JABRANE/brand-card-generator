@@ -271,64 +271,64 @@ function CelebrityZodiacDatabase() {
   const zodiacSigns = Object.keys(celebrityDatabase).sort()
 
   return (
-    <div className="space-y-8">
+    <div className="space-y-6 sm:space-y-8">
       {/* Header */}
-      <div className="text-center space-y-4">
+      <div className="text-center space-y-3 sm:space-y-4">
         <div className="flex justify-center items-center gap-2 mb-2">
-          <Crown className="w-8 h-8 text-amber-600" />
-          <h1 className="text-4xl font-bold bg-gradient-to-r from-amber-600 to-purple-600 bg-clip-text text-transparent">
+          <Crown className="w-6 h-6 sm:w-8 sm:h-8 text-amber-600" />
+          <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold bg-gradient-to-r from-amber-600 to-purple-600 bg-clip-text text-transparent">
             Celebrity Zodiac Database
           </h1>
-          <Star className="w-8 h-8 text-amber-600" />
+          <Star className="w-6 h-6 sm:w-8 sm:h-8 text-amber-600" />
         </div>
-        <p className="text-lg text-slate-600 max-w-3xl mx-auto">
+        <p className="text-sm sm:text-base lg:text-lg text-slate-600 max-w-3xl mx-auto px-2">
           Discover the zodiac signs of your favorite celebrities! Search through hundreds of famous personalities 
           and find out which stars share your astrological sign.
         </p>
-        <div className="flex justify-center items-center gap-4 text-sm text-slate-500">
+        <div className="flex flex-col sm:flex-row justify-center items-center gap-2 sm:gap-4 text-xs sm:text-sm text-slate-500">
           <div className="flex items-center gap-1">
-            <Users className="w-4 h-4" />
+            <Users className="w-3 h-3 sm:w-4 sm:h-4" />
             <span>{allCelebrities.length}+ Celebrities</span>
           </div>
           <div className="flex items-center gap-1">
-            <Star className="w-4 h-4" />
+            <Star className="w-3 h-3 sm:w-4 sm:h-4" />
             <span>12 Zodiac Signs</span>
           </div>
           <div className="flex items-center gap-1">
-            <TrendingUp className="w-4 h-4" />
+            <TrendingUp className="w-3 h-3 sm:w-4 sm:h-4" />
             <span>Updated Daily</span>
           </div>
         </div>
       </div>
 
       {/* Search and Filters */}
-      <Card className="p-6 shadow-lg border-0 bg-gradient-to-r from-amber-50 to-orange-50">
+      <Card className="p-4 sm:p-6 shadow-lg border-0 bg-gradient-to-r from-amber-50 to-orange-50">
         <CardContent className="space-y-4">
           {/* Search Bar */}
           <div className="relative">
-            <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-slate-400 w-5 h-5" />
-            <Input
-              type="text"
-              placeholder="Search celebrities by name, zodiac sign, or category..."
-              value={searchTerm}
-              onChange={(e) => setSearchTerm(e.target.value)}
-              className="pl-10 text-lg py-3 border-2 border-amber-200 focus:border-amber-400"
-            />
+            <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-slate-400 w-4 h-4 sm:w-5 sm:h-5" />
+                         <Input
+               type="text"
+               placeholder="Search celebrities by name, zodiac sign, or category..."
+               value={searchTerm}
+               onChange={(e) => setSearchTerm(e.target.value)}
+               className="pl-10 text-sm sm:text-base lg:text-lg py-2 sm:py-3 min-h-[44px] border-2 border-amber-200 focus:border-amber-400"
+             />
           </div>
 
           {/* Filters */}
-          <div className="grid md:grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             {/* Zodiac Sign Filter */}
             <div className="space-y-2">
-              <label className="flex items-center gap-2 text-sm font-medium text-slate-700">
-                <Filter className="w-4 h-4" />
+              <label className="flex items-center gap-2 text-xs sm:text-sm font-medium text-slate-700">
+                <Filter className="w-3 h-3 sm:w-4 sm:h-4" />
                 Filter by Zodiac Sign
               </label>
-              <select
-                value={selectedSign}
-                onChange={(e) => setSelectedSign(e.target.value)}
-                className="w-full p-3 border-2 border-amber-200 rounded-lg focus:border-amber-400 bg-white"
-              >
+                             <select
+                 value={selectedSign}
+                 onChange={(e) => setSelectedSign(e.target.value)}
+                 className="w-full p-2 sm:p-3 min-h-[44px] border-2 border-amber-200 rounded-lg focus:border-amber-400 bg-white text-xs sm:text-sm lg:text-base"
+               >
                 <option value="">All Zodiac Signs</option>
                 {zodiacSigns.map(sign => {
                   const info = getZodiacInfo(sign)
@@ -343,15 +343,15 @@ function CelebrityZodiacDatabase() {
 
             {/* Category Filter */}
             <div className="space-y-2">
-              <label className="flex items-center gap-2 text-sm font-medium text-slate-700">
-                <Award className="w-4 h-4" />
+              <label className="flex items-center gap-2 text-xs sm:text-sm font-medium text-slate-700">
+                <Award className="w-3 h-3 sm:w-4 sm:h-4" />
                 Filter by Category
               </label>
-              <select
-                value={selectedCategory}
-                onChange={(e) => setSelectedCategory(e.target.value)}
-                className="w-full p-3 border-2 border-amber-200 rounded-lg focus:border-amber-400 bg-white"
-              >
+                             <select
+                 value={selectedCategory}
+                 onChange={(e) => setSelectedCategory(e.target.value)}
+                 className="w-full p-2 sm:p-3 min-h-[44px] border-2 border-amber-200 rounded-lg focus:border-amber-400 bg-white text-xs sm:text-sm lg:text-base"
+               >
                 <option value="">All Categories</option>
                 {categories.map(category => (
                   <option key={category} value={category}>
@@ -372,7 +372,7 @@ function CelebrityZodiacDatabase() {
                 setSelectedCategory('')
                 setSearchTerm('')
               }}
-              className="text-xs"
+              className="text-xs min-h-[44px] px-3"
             >
               All Celebrities
             </Button>
@@ -380,7 +380,7 @@ function CelebrityZodiacDatabase() {
               variant={selectedCategory === 'Music' ? "default" : "outline"}
               size="sm"
               onClick={() => setSelectedCategory(selectedCategory === 'Music' ? '' : 'Music')}
-              className="text-xs"
+              className="text-xs min-h-[44px] px-3"
             >
               🎤 Music Stars
             </Button>
@@ -388,7 +388,7 @@ function CelebrityZodiacDatabase() {
               variant={selectedCategory === 'Movies' ? "default" : "outline"}
               size="sm"
               onClick={() => setSelectedCategory(selectedCategory === 'Movies' ? '' : 'Movies')}
-              className="text-xs"
+              className="text-xs min-h-[44px] px-3"
             >
               🎬 Movie Stars
             </Button>
@@ -396,7 +396,7 @@ function CelebrityZodiacDatabase() {
               variant={selectedCategory === 'Politics' ? "default" : "outline"}
               size="sm"
               onClick={() => setSelectedCategory(selectedCategory === 'Politics' ? '' : 'Politics')}
-              className="text-xs"
+              className="text-xs min-h-[44px] px-3"
             >
               🇺🇸 Politicians
             </Button>
@@ -406,15 +406,15 @@ function CelebrityZodiacDatabase() {
 
       {/* Results Counter */}
       <div className="text-center">
-        <p className="text-lg text-slate-600">
-          <span className="font-bold text-2xl text-amber-600">{filteredCelebrities.length}</span> 
+        <p className="text-sm sm:text-base lg:text-lg text-slate-600">
+          <span className="font-bold text-xl sm:text-2xl text-amber-600">{filteredCelebrities.length}</span> 
           {filteredCelebrities.length === 1 ? ' celebrity' : ' celebrities'} found
           {searchTerm && <span className="text-slate-500"> for "{searchTerm}"</span>}
         </p>
       </div>
 
       {/* Celebrity Grid */}
-      <div className="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-6">
         {filteredCelebrities.map((celebrity, index) => {
           const zodiacInfo = getZodiacInfo(celebrity.sign)
           const hasImage = celebrityImages[celebrity.name]
@@ -426,12 +426,12 @@ function CelebrityZodiacDatabase() {
               key={index} 
               className={`hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 ${zodiacInfo.bgColor} border-2`}
             >
-              <CardHeader className="text-center pb-3">
+              <CardHeader className="text-center pb-2 sm:pb-3">
                 {/* Celebrity Image or Placeholder */}
-                <div className="relative w-24 h-24 mx-auto mb-3">
+                <div className="relative w-16 h-16 sm:w-20 sm:h-20 lg:w-24 lg:h-24 mx-auto mb-2 sm:mb-3">
                   {isLoading ? (
                     <div className="w-full h-full rounded-full bg-slate-200 flex items-center justify-center">
-                      <Loader2 className="w-6 h-6 animate-spin text-slate-400" />
+                      <Loader2 className="w-4 h-4 sm:w-6 sm:h-6 animate-spin text-slate-400" />
                     </div>
                   ) : hasImage ? (
                     <img 
@@ -442,26 +442,26 @@ function CelebrityZodiacDatabase() {
                     />
                   ) : hasError ? (
                     <div className="w-full h-full rounded-full bg-slate-200 flex items-center justify-center">
-                      <User className="w-8 h-8 text-slate-400" />
+                      <User className="w-6 h-6 sm:w-8 sm:h-8 text-slate-400" />
                     </div>
                   ) : (
-                    <div className="text-4xl mb-2">{celebrity.image}</div>
+                    <div className="text-2xl sm:text-3xl lg:text-4xl mb-2">{celebrity.image}</div>
                   )}
                 </div>
                 
-                <CardTitle className="text-lg font-bold text-slate-800">
+                <CardTitle className="text-sm sm:text-base lg:text-lg font-bold text-slate-800">
                   {celebrity.name}
                 </CardTitle>
-                <div className={`inline-flex items-center gap-1 px-3 py-1 rounded-full ${zodiacInfo.bgColor} ${zodiacInfo.color} font-medium text-sm`}>
-                  <span className="text-lg">{zodiacInfo.symbol}</span>
+                <div className={`inline-flex items-center gap-1 px-2 sm:px-3 py-1 rounded-full ${zodiacInfo.bgColor} ${zodiacInfo.color} font-medium text-xs sm:text-sm`}>
+                  <span className="text-sm sm:text-base lg:text-lg">{zodiacInfo.symbol}</span>
                   {celebrity.sign}
                 </div>
               </CardHeader>
               
-              <CardContent className="text-center space-y-3">
-                <div className="space-y-2">
-                  <div className="flex items-center justify-center gap-1 text-sm text-slate-600">
-                    <Calendar className="w-4 h-4" />
+              <CardContent className="text-center space-y-2 sm:space-y-3">
+                <div className="space-y-1 sm:space-y-2">
+                  <div className="flex items-center justify-center gap-1 text-xs sm:text-sm text-slate-600">
+                    <Calendar className="w-3 h-3 sm:w-4 sm:h-4" />
                     {celebrity.birthday}
                   </div>
                   <div className="inline-block px-2 py-1 bg-white/60 rounded-full text-xs font-medium text-slate-700">
@@ -469,7 +469,7 @@ function CelebrityZodiacDatabase() {
                   </div>
                 </div>
                 
-                <p className="text-sm text-slate-700 leading-relaxed">
+                <p className="text-xs sm:text-sm text-slate-700 leading-relaxed">
                   {celebrity.description}
                 </p>
               </CardContent>
@@ -480,12 +480,12 @@ function CelebrityZodiacDatabase() {
 
       {/* No Results */}
       {filteredCelebrities.length === 0 && (
-        <div className="text-center py-16">
-          <div className="text-6xl mb-4">🔍</div>
-          <h2 className="text-2xl font-bold text-slate-700 mb-2">
+        <div className="text-center py-8 sm:py-16">
+          <div className="text-4xl sm:text-6xl mb-4">🔍</div>
+          <h2 className="text-xl sm:text-2xl font-bold text-slate-700 mb-2">
             No celebrities found
           </h2>
-          <p className="text-slate-500 mb-6">
+          <p className="text-sm sm:text-base text-slate-500 mb-4 sm:mb-6 px-4">
             Try adjusting your search terms or filters to find more celebrities.
           </p>
           <Button
@@ -494,7 +494,7 @@ function CelebrityZodiacDatabase() {
               setSelectedSign('')
               setSelectedCategory('')
             }}
-            className="bg-gradient-to-r from-amber-600 to-orange-600 hover:from-amber-700 hover:to-orange-700"
+            className="min-h-[44px] bg-gradient-to-r from-amber-600 to-orange-600 hover:from-amber-700 hover:to-orange-700"
           >
             Clear All Filters
           </Button>
