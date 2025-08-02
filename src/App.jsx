@@ -5,6 +5,7 @@ import CompatibilityChecker from './components/CompatibilityChecker/Compatibilit
 import CelebrityZodiacDatabase from './components/CelebrityZodiacDatabase/CelebrityZodiacDatabase'
 
 import { useState } from 'react'
+import ZodiacBlog from './components/ZodiacBlog/ZodiacBlog'
 
 function App() {
   const [activeTab, setActiveTab] = useState('day-checker')
@@ -25,6 +26,8 @@ function App() {
         {activeTab === 'day-checker' && <DateChecker />}
         {activeTab === 'compatibility' && <CompatibilityChecker />}
         {activeTab === 'CelebritiesZodiacs' && <CelebrityZodiacDatabase />}
+        {activeTab === 'ZodiacBlog' && <ZodiacBlog />}
+
         
       </div>
     </div>

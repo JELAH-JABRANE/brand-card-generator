@@ -3,9 +3,10 @@ import { Button } from '@/components/ui/button'
 
 function Navigation({ activeTab, setActiveTab }) {
   const navItems = [
-    { id: 'day-checker', label: 'What Day Was It?', icon: '📅' },
-    { id: 'compatibility', label: 'Compatibility', icon: '💕' },
-    { id: 'CelebritiesZodiacs', label: 'Celebrities signs', icon: '💕' }
+    { id: 'day-checker', label: 'What Day Was It?', icon: '' },
+    { id: 'compatibility', label: 'Compatibility', icon: '' },
+    { id: 'CelebritiesZodiacs', label: 'Celebrities signs', icon: '' },
+    { id: 'ZodiacBlog', label: 'Zodiac Blog', icon: '' }
   ]
   
   return (
