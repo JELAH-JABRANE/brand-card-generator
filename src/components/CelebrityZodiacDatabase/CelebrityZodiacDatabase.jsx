@@ -1,13 +1,23 @@
-import React, { useState, useMemo } from 'react'
+import React, { useState, useMemo, useEffect } from 'react'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
-import { Search, Star, Crown, TrendingUp, Calendar, Award, Users, Sparkles, Filter } from 'lucide-react'
+import { Search, Star, Crown, TrendingUp, Calendar, Award, Users, Sparkles, Filter, Loader2, User } from 'lucide-react'
+
+// TMDB API Configuration
+const TMDB_API_KEY = '6994fb7b27b71c71396146bfdc513d67'
+const TMDB_BASE_URL = 'https://api.themoviedb.org/3'
+const TMDB_IMAGE_BASE_URL = 'https://image.tmdb.org/t/p/w200'
 
 function CelebrityZodiacDatabase() {
   const [searchTerm, setSearchTerm] = useState('')
   const [selectedSign, setSelectedSign] = useState('')
   const [selectedCategory, setSelectedCategory] = useState('')
+  
+  // State for TMDB image fetching
+  const [celebrityImages, setCelebrityImages] = useState({})
+  const [loadingImages, setLoadingImages] = useState({})
+  const [imageErrors, setImageErrors] = useState({})
 
   // Massive celebrity database organized by zodiac signs
   const celebrityDatabase = {
@@ -194,6 +204,49 @@ function CelebrityZodiacDatabase() {
     return filtered
   }, [allCelebrities, searchTerm, selectedSign, selectedCategory])
 
+  // Function to fetch celebrity image from TMDB API
+  const fetchCelebrityImage = async (celebrityName) => {
+    // Skip if already loaded or loading
+    if (celebrityImages[celebrityName] || loadingImages[celebrityName]) {
+      return
+    }
+
+    // Set loading state for this celebrity
+    setLoadingImages(prev => ({ ...prev, [celebrityName]: true }))
+
+    try {
+      // Search for the person in TMDB
+      const searchUrl = `${TMDB_BASE_URL}/search/person?api_key=${TMDB_API_KEY}&query=${encodeURIComponent(celebrityName)}&language=en-US&page=1&include_adult=false`
+      
+      const response = await fetch(searchUrl)
+      const data = await response.json()
+
+      if (data.results && data.results.length > 0) {
+        const person = data.results[0]
+        if (person.profile_path) {
+          const imageUrl = `${TMDB_IMAGE_BASE_URL}${person.profile_path}`
+          setCelebrityImages(prev => ({ ...prev, [celebrityName]: imageUrl }))
+        } else {
+          setImageErrors(prev => ({ ...prev, [celebrityName]: true }))
+        }
+      } else {
+        setImageErrors(prev => ({ ...prev, [celebrityName]: true }))
+      }
+    } catch (error) {
+      console.error(`Error fetching image for ${celebrityName}:`, error)
+      setImageErrors(prev => ({ ...prev, [celebrityName]: true }))
+    } finally {
+      setLoadingImages(prev => ({ ...prev, [celebrityName]: false }))
+    }
+  }
+
+  // Fetch images for filtered celebrities when component mounts or filters change
+  useEffect(() => {
+    filteredCelebrities.forEach(celebrity => {
+      fetchCelebrityImage(celebrity.name)
+    })
+  }, [filteredCelebrities])
+
   // Get zodiac sign info
   const getZodiacInfo = (sign) => {
     const zodiacInfo = {
@@ -364,13 +417,38 @@ function CelebrityZodiacDatabase() {
       <div className="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
         {filteredCelebrities.map((celebrity, index) => {
           const zodiacInfo = getZodiacInfo(celebrity.sign)
+          const hasImage = celebrityImages[celebrity.name]
+          const isLoading = loadingImages[celebrity.name]
+          const hasError = imageErrors[celebrity.name]
+          
           return (
             <Card 
               key={index} 
               className={`hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 ${zodiacInfo.bgColor} border-2`}
             >
               <CardHeader className="text-center pb-3">
-                <div className="text-4xl mb-2">{celebrity.image}</div>
+                {/* Celebrity Image or Placeholder */}
+                <div className="relative w-24 h-24 mx-auto mb-3">
+                  {isLoading ? (
+                    <div className="w-full h-full rounded-full bg-slate-200 flex items-center justify-center">
+                      <Loader2 className="w-6 h-6 animate-spin text-slate-400" />
+                    </div>
+                  ) : hasImage ? (
+                    <img 
+                      src={hasImage} 
+                      alt={`${celebrity.name} profile`}
+                      className="w-full h-full rounded-full object-cover border-2 border-white shadow-md"
+                      onError={() => setImageErrors(prev => ({ ...prev, [celebrity.name]: true }))}
+                    />
+                  ) : hasError ? (
+                    <div className="w-full h-full rounded-full bg-slate-200 flex items-center justify-center">
+                      <User className="w-8 h-8 text-slate-400" />
+                    </div>
+                  ) : (
+                    <div className="text-4xl mb-2">{celebrity.image}</div>
+                  )}
+                </div>
+                
                 <CardTitle className="text-lg font-bold text-slate-800">
                   {celebrity.name}
                 </CardTitle>

@@ -28,8 +28,9 @@ function App() {
         {activeTab === 'CelebritiesZodiacs' && <CelebrityZodiacDatabase />}
         {activeTab === 'ZodiacBlog' && <ZodiacBlog />}
 
-        
       </div>
+      
+      {/* Footer */}
     </div>
   )
 }
